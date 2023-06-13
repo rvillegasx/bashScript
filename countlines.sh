@@ -7,10 +7,21 @@ while getopts ":o:m:" arg; do
     case ${arg} in
         o)
             ow=${OPTARG}
+            # for i in $(find . \( ! -regex '.*/\..*' \) -type f -maxdepth 1 -user ${ow})
+            # do
+            #     b=${i:2}
+            #     echo "$b"
+            # done
+            find . \( ! -regex '.*/\..*' \) -type f -maxdepth 1 -user ${ow} -print0 | while read -d $'\0' file
+            do
+                b=${file:2}
+                echo "$b"
+            done
             ;;
         m)
             mv=${OPTARG}
             ((mv >= 1 && mv <= 12)) || usage
+            # for i in ./*
             ;;
         *)
             usage
@@ -26,3 +37,5 @@ fi
 echo "optind = ${OPTIND}"
 echo "o = ${ow}"
 echo "m = ${mv}"
+
+# find . \( ! -regex '.*/\..*' \) -type f -maxdepth 1 -user rvillegas
