@@ -32,7 +32,7 @@ else
     then
         monthnames=(ZERO Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
         month=${monthnames[${mv}]}
-        ls -l | grep -e $month | awk '{print $9}' | while read -r file
+        ls -l | grep -i -e $month | awk '{print $9}' | while read -r file
         do
             f=${file}
             l=$(wc $f | awk '{print $1}')
